@@ -13,6 +13,9 @@
 	<form id='form_employee' method='post' enctype='multipart/form-data'>
 		{% csrf_token %}
 		{{form.as_p}}
-		<p><input type='submit' value='Registrar'/></p>
+		<p><input type='submit' value='Actualizar'/></p>
+		<p>
+            <a href="{% url 'list-employees' %}"><--Retornar</a>
+        </p>
 	</form>
 {% endblock %}

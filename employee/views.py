@@ -37,7 +37,7 @@ def update_employee(request, pk):
     if request.method == 'POST':
         if form.is_valid():
             form.save()
-            return reverse('')
+            return redirect('employees/')
     context = {
         'form': form,
         'employee': employee
@@ -46,16 +46,13 @@ def update_employee(request, pk):
 
 
 def deactivate_employee(request, pk):
-
     if request.method == 'POST':
-        Employee.objects.filter(pk=pk).update(activate=0)
-        return reverse('list-employees')
+        Employee.objects.filter(pk=pk).update(active=0)
+        return redirect('employees/')
 
-    employee = Employee.objects.filter(pk=pk)
-    form = EmployeeForm(request.POST, instance=employee)
+    employee = Employee.objects.filter(pk=pk).first()
     context = {
-        'employee': employee,
-        'form': form
+        'employee': employee
     }
     return render(request, 'deactivate_employee.html', context)
 

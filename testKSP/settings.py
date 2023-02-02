@@ -91,8 +91,8 @@ WSGI_APPLICATION = 'testKSP.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mydb',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite3',
         'USER': 'root',
         'PASSWORD': 'root',
         'HOST': 'localhost',
