@@ -11,7 +11,7 @@
 
 {% block contenido %}
     <h1>Datos de los beneficiarios del empleado: {{ employee.full_name }}</h1>
-            <p> <a href='create'>Registrar beneficiario</a> </p>
+            <p> <a href="{% url 'create-beneficiary' %}">Registrar beneficiario</a> </p>
             {% if beneficiaries %}
               <table align="center" style="margin: 0px auto;">
                 <thead>
@@ -20,8 +20,8 @@
                         <th>Parentesco</th>
                         <th>Fecha de nacimiento</th>
                         <th>Sexo</th>
-                        <th>Editar empleado</th>
-                        <th>Eliminar empleado</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,8 +31,8 @@
                            <td>{{ element.relationship }}</td>
                            <td>{{ element.birthday }}</td>
                            <td>{{ element.sex }}</td>
-                           <td><a href="update/{{ element.id }}">Editar</a></td>
-                           <td><a href="delete/{{ element.id }}">Eliminar</a></td>
+                           <td><a href="{% url 'update-beneficiary'  element.id  %}">Editar</a></td>
+                           <td><a href="{% url 'delete-beneficiary'  element.id  %}">Eliminar</a></td>
                         </tr>
                      {% endfor %}
                 </tbody>

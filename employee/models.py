@@ -53,7 +53,7 @@ class Beneficiary(models.Model):
     full_name = models.CharField(max_length=250, null=False, blank=True)
     relationship = models.CharField(max_length=10, choices=[(tag.name, tag.value) for tag in Relationship])
     sex = models.CharField(max_length=10, choices=[(tag.name, tag.value) for tag in Sex])
-    birthday = models.DateTimeField(auto_now_add=True, verbose_name="hiring_date")
+    birthday = models.DateField(verbose_name="Birthday", null=True)
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name="employee", null=True)
 
     class Meta:

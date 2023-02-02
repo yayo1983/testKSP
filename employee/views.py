@@ -23,9 +23,9 @@ def create_employee(request):
         if form.is_valid():
             try:
                 form.save()
-                return redirect('employees')
+                return redirect('list-employees')
             except:
-                pass
+                return redirect('list-employees')
     else:
         form = EmployeeForm()
     return render(request, 'employee_form.html', {'form': form})
@@ -48,7 +48,7 @@ def update_employee(request, pk):
 def deactivate_employee(request, pk):
     if request.method == 'POST':
         Employee.objects.filter(pk=pk).update(active=0)
-        return redirect('employees/')
+        return redirect('list-employees')
 
     employee = Employee.objects.filter(pk=pk).first()
     context = {
@@ -74,14 +74,11 @@ def create_beneficiary(request):
         if form.is_valid():
             try:
                 form.save()
-                employees = Employee.objects.filter(active=1)
-                serializer = EmployeeSerializers(employees, many=True)
-                return render(request, 'list_employees.html', {'employees': serializer.data})
+                return redirect('list-employees')
             except:
-                render(request, 'beneficiary_form.html', {'form':form})
-    else:
-        form = BeneficiaryForm()
-    return render(request, 'beneficiary_form.html', {'form':form})
+                pass
+    form = BeneficiaryForm()
+    return render(request, 'beneficiary_form.html', {'form': form})
 
 
 def update_beneficiary(request, pk):
@@ -91,7 +88,7 @@ def update_beneficiary(request, pk):
         form = BeneficiaryForm(request.POST, instance=beneficiary)
         if form.is_valid():
             form.save()
-            return redirect('/list_employees/employee_detail/'+str(beneficiary.employee.id))
+            return redirect('detail-employees', pk=beneficiary.employee.id)
 
     context = {
         'beneficiary': beneficiary,
@@ -104,7 +101,7 @@ def delete_beneficiary(request, pk):
     beneficiary = Beneficiary.objects.get(id=pk)
     if request.method == 'POST':
         beneficiary.delete()
-        return redirect('/list_employees/employee_detail/'+str(beneficiary.employee.id))
+        return redirect('detail-employees', pk=beneficiary.employee.id)
 
     context = {
         'beneficiary': beneficiary,

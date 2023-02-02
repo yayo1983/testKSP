@@ -36,9 +36,9 @@
                                 <td>{% if element.photo %}   <a src="{{element.photo}}" target="_blank" >
                                     <img src="{{element.photo}}" alt="{{element.photo}}" width="30px" height="30px"></a>{% endif %}
                                 </td>
-                                <td><a href="employee_detail/{{ element.id }}">Detalles</a></td>
-                                <td><a href="update/{{ element.id }}">Editar</a></td>
-                                <td><a href="deactivate/{{ element.id }}">Eliminar</a></td>
+                                <td><a href="{% url 'detail-employees'  element.id  %}">Detalles</a></td>
+                                <td><a href="{% url 'update-employee'  element.id  %}">Editar</a></td>
+                                <td><a href="{% url 'delete-employee'  element.id  %}">Eliminar</a></td>
                             </tr>
                         {% endfor %}
                     </tbody>
