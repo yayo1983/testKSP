@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block titulo %} Tests de KPS {% endblock %}
+{% block css %}
+  <style>
+	img { width:100px; }
+  </style>
+{% endblock %}
+{% block encabezado %}
+  <h1>Menú</h1>
+{% endblock %}
+
+{% block contenido %}
+    <h1>Datos de los beneficiarios del empleado: {{ employee.full_name }}</h1>
+            <p> <a href='create'>Registrar beneficiario</a> </p>
+            {% if beneficiaries %}
+              <table align="center" style="margin: 0px auto;">
+                <thead>
+                    <tr>
+                        <th>Nombre completo</th>
+                        <th>Parentesco</th>
+                        <th>Fecha de nacimiento</th>
+                        <th>Sexo</th>
+                        <th>Editar empleado</th>
+                        <th>Eliminar empleado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                     {%  for element in beneficiaries %}
+                        <tr align="center">
+                           <td>{{  element.full_name }}</td>
+                           <td>{{ element.relationship }}</td>
+                           <td>{{ element.birthday }}</td>
+                           <td>{{ element.sex }}</td>
+                           <td><a href="update/{{ element.id }}">Editar</a></td>
+                           <td><a href="delete/{{ element.id }}">Eliminar</a></td>
+                        </tr>
+                     {% endfor %}
+                </tbody>
+              </table>
+            {% else %}
+                    <h4> <b>No hay beneficiarios registrados</b> </h4>
+            {% endif %}
+{% endblock %}

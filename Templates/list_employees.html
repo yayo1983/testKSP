@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block titulo %} Tests de KPS {% endblock %}
+{% block encabezado %}
+  <h1>Menú</h1>
+{% endblock %}
+
+{% block contenido %}
+<h1>Lista de empleados</h1>
+              {% if employees %}
+                <table align="center" style="margin: 2px auto;">
+                    <thead>
+                        <tr align="center">
+                            <th>Identificador</th>
+                            <th>Nombre completo</th>
+                            <th>Puesto de trabajo</th>
+                            <th>Salario</th>
+                            <th>Estatus</th>
+                            <th>Fecha de contratación</th>
+                            <th>Activo</th>
+                            <th>Foto</th>
+                            <th>Ver beneficiarios</th>
+                            <th>Eliminar empleado</th>
+                            <th>Eliminar empleado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%  for element in employees %}
+                            <tr align="center">
+                                <td>{{ element.id }}</td>
+                                <td>{{ element.full_name }}</td>
+                                <td>{{ element.job }}</td>
+                                <td>{{ element.salary }}</td>
+                                <td>{{ element.status }}</td>
+                                <td>{{ element.hiring_date }}  {{ element.hiring_date|date:"D d M Y" }} {{ element.hiring_date|time:"H:i" }} </td>
+                                <td>{% if element.active %} Sí  {% else %} No {% endif %}</td>
+                                <td>{% if element.photo %}   <a src="{{element.photo}}" target="_blank" >
+                                    <img src="{{element.photo}}" alt="{{element.photo}}" width="30px" height="30px"></a>{% endif %}
+                                </td>
+                                <td><a href="employee_detail/{{ element.id }}">Detalles</a></td>
+                                <td><a href="update/{{ element.id }}">Editar</a></td>
+                                <td><a href="deactivate/{{ element.id }}">Eliminar</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                      <h4> <b>No hay empleados registrados</b> </h4>
+             {% endif %}
+{% endblock %}

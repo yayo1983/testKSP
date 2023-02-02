@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block titulo %} Tests de KPS {% endblock %}
+{% block css %}
+  <style>
+	img { width:100px; }
+  </style>
+{% endblock %}
+{% block encabezado %}
+  <h1>Menú</h1>
+{% endblock %}
+
+{% block contenido %}
+	<form id='form_employee' method='post' enctype='multipart/form-data'>
+		{% csrf_token %}
+		{{form.as_p}}
+		<p><input type='submit' value='Registrar'/></p>
+	</form>
+{% endblock %}
