@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-b)0%v^60^bw2dg(nm0e&u5)mx$8dl^b#bd!ynw#_ykggp4ah)m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['44.195.247.222','127.0.0.1']
 
 # Base url to serve media files
 MEDIA_URL = '/media/'
