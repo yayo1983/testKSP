@@ -37,7 +37,7 @@ def update_employee(request, pk):
     if request.method == 'POST':
         if form.is_valid():
             form.save()
-            return redirect('employees/')
+            return redirect('list-employees')
     context = {
         'form': form,
         'employee': employee
