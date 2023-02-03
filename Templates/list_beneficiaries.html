@@ -13,6 +13,7 @@
     <h1>Datos de los beneficiarios del empleado: {{ employee.full_name }}</h1>
             <p> <a href="{% url 'create-beneficiary' %}">Registrar beneficiario</a> </p>
             {% if beneficiaries %}
+              {% load djutils %}
               <table align="center" style="margin: 0px auto;">
                 <thead>
                     <tr>
@@ -27,10 +28,10 @@
                 <tbody>
                      {%  for element in beneficiaries %}
                         <tr align="center">
-                           <td>{{  element.full_name }}</td>
-                           <td>{{ element.relationship }}</td>
+                           <td>{{ element.full_name }}</td>
+                           <td>{{ Relationship|get_by_name:element.relationship }}</td>
                            <td>{{ element.birthday }}</td>
-                           <td>{{ element.sex }}</td>
+                           <td>{{ Sex|get_by_name:element.sex }}</td>
                            <td><a href="{% url 'update-beneficiary'  element.id  %}">Editar</a></td>
                            <td><a href="{% url 'delete-beneficiary'  element.id  %}">Eliminar</a></td>
                         </tr>

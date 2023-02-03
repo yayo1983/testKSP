@@ -1,22 +1,28 @@
 from django.shortcuts import render, redirect
-from .models import Employee, Beneficiary
+from .models import Employee, Beneficiary, Sex, Status, Relationship
 from .forms import EmployeeForm, BeneficiaryForm
 from .serializers import EmployeeSerializers, BeneficiarySerializers
-from xlutils.copy import copy # http://pypi.python.org/pypi/xlutils
-from xlrd import open_workbook # http://pypi.python.org/pypi/xlrd
 import xlwt
 from django.http import HttpResponse
-import os
+
 
 def index(request):
     return render(request, 'index.html')
+
+
+def enum_to_dict(enum):
+    dict_enum = {}
+    for name, members in enum.__members__.items():
+        dict_enum[name] = members.value
+    return dict_enum
 
 
 def list_employees(request):
     try:
         employees = Employee.objects.filter(active=1)
         serializer = EmployeeSerializers(employees, many=True)
-        return render(request, 'list_employees.html', {'employees': serializer.data})
+        #return render(request, 'list_employees.html', {'employees': serializer.data, 'status': enum_to_dict(Status)})
+        return render(request, 'list_employees.html', {'employees': serializer.data, 'Status':Status})
     except:
         return render(request, 'list_employees.html', {'employees': []})
 
@@ -67,7 +73,7 @@ def detail_beneficiaries(request, pk):
         beneficiaries = Beneficiary.objects.filter(employee=employee)
         serializer_beneficiaries = BeneficiarySerializers(beneficiaries, many=True)
         return render(request, 'list_beneficiaries.html',
-                      {'employee': employee, 'beneficiaries': serializer_beneficiaries.data})
+                      {'employee': employee, 'beneficiaries': serializer_beneficiaries.data, 'Sex':Sex, 'Relationship':Relationship})
     except Beneficiary.DoesNotExist:
         return render(request, 'list_beneficiaries.html', {'employees': employee, 'beneficiary': []})
 

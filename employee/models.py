@@ -2,6 +2,12 @@ from django.db import models
 from enum import Enum
 
 
+def forDjango(cls):
+    cls.do_not_call_in_templates = True
+    return cls
+
+
+@forDjango
 class Sex(Enum):
     M = "Masculino"
     F = "Femenino"
@@ -9,7 +15,7 @@ class Sex(Enum):
     def __str__(self):
         return self.name
 
-
+@forDjango
 class Relationship(Enum):
     P = 'Padre'
     M = 'Madre'
@@ -20,14 +26,13 @@ class Relationship(Enum):
     def __str__(self):
         return self.name
 
-
+@forDjango
 class Status(Enum):
     S = "Soltero"
     C = "Casado"
     P = "Separado"
     D = "Divorciado"
     V = "Viudo"
-
 
     def __str__(self):
         return self.name
