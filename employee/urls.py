@@ -12,4 +12,5 @@ urlpatterns = [
     path('beneficiary/create', views.create_beneficiary, name='create-beneficiary'),
     path('beneficiary/update/<int:pk>', views.update_beneficiary, name='update-beneficiary'),
     path('beneficiary/delete/<int:pk>', views.delete_beneficiary, name='delete-beneficiary'),
+    path('export_excel/', views.export_users_xls, name='export_excel'),
 ]
