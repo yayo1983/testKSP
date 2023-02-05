@@ -70,7 +70,7 @@ ROOT_URLCONF = 'testKSP.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['Templates'],
+        'DIRS': [   ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

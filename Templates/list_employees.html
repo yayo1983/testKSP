@@ -6,10 +6,9 @@
 
 {% block contenido %}
 <h1>Lista de empleados</h1>
-              {% if employees %}
-              {% load djutils %}
+              {% if employees  %}
                <p><a href="{% url 'export_excel' %}">Exportar a Microsoft Excel</a></p>
-
+               {% load djutils %}
                 <table align="center" style="margin: 2px auto;">
                     <thead>
                         <tr align="center">
